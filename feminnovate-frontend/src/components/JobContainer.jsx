@@ -28,7 +28,7 @@ const JobContainer = () => {
     }
 
     return (
-        <div className="w-[100%] h-[25vw] border-2 border-grey rounded-2xl">
+        <div className="w-[100%] border-2 border-grey rounded-2xl">
             <div className="p-2">
                 <div className="h-[70%] rounded-t-2xl bg-pink bg-opacity-25 p-4">
                     <div className="flex w-[100%] flex-row">
