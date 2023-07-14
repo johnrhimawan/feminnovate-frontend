@@ -23,6 +23,8 @@ export default {
       'black': '#1E1E1E',
       'purple': '#D5A0FF',
       'grey': '#D9D9D9',
+      'hyperlink': '#256EFF',
+      'dark-grey': '#656565',
     },
     fontFamily: {
       'sans': ['Inter', 'sans-serif']
