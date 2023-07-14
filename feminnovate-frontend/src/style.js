@@ -8,7 +8,9 @@ const styles = {
     "subheading4": "font-sans font-bold text-[18px]",
     "subheading5": "font-sans font-medium text-[14px]",
     "subheading6": "font-sans font-semibold text-[14px]",
+    "subheading7": "font-sans font-medium text-[18px]",
     "paragraph1": "font-sans font-medium text-[11px]",
+    
 }
 
 export default styles;
