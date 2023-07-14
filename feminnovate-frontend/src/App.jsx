@@ -1,11 +1,15 @@
 import './App.css'
 import JobListingPage from './pages/JobListingPage'
+import Navbar from './components/Navbar'
 
 function App() {
 
   return (
-    <JobListingPage/>
+    <>
+      <Navbar />
+      <JobListingPage />
+    </>
   )
 }
 
-export default App
+export default App;
