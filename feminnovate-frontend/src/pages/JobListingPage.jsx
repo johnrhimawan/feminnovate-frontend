@@ -1,12 +1,12 @@
 import JobContainer from "../components/JobContainer";
 import JobSidebar from "../components/JobSidebar";
-import styles from "../style";
 import Navbar from "../components/Navbar";
+import styles from "../style";
 
 const JobListingPage = () => {
     return (
         <>
-            <Navbar />
+            <Navbar/>
             <div className="flex w-[100%] my-10 px-10 bg-white">
                 <div className="w-[20%]">
                     <JobSidebar />
