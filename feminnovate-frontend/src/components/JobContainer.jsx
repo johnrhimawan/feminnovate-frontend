@@ -4,9 +4,11 @@ import briefcase from '../assets/briefcase.png'
 import cash from '../assets/cash.png'
 import location from '../assets/map-marker.png'
 import clock from '../assets/clock.png'
+import { useNavigate } from 'react-router-dom'
 
 const JobContainer = () => {
 
+    const navigate = useNavigate();
     const templateText = "We are seeking a skilled and dynamic Full Stack Developer to join our team. As a Full Stack Developer, you will be responsible for designing, developing, and implementing web applications that encompass both the front-end and back-end components. You will work closely with cross-functional teams, including designers, product managers, and software engineers, to create innovative and user-friendly digital solutions."
 
     /**
@@ -27,8 +29,12 @@ const JobContainer = () => {
         return paragraph
     }
 
+    const redirectToJobDetails = () => {
+        navigate(`/jobs/3`);
+    }
+
     return (
-        <div className="w-[100%] border-2 border-grey rounded-2xl">
+        <div className="w-[100%] border-2 border-grey rounded-2xl cursor-pointer hover:bg-grey hover:bg-opacity-30" onClick={redirectToJobDetails}>
             <div className="p-2">
                 <div className="h-[70%] rounded-t-2xl bg-pink bg-opacity-25 p-4">
                     <div className="flex w-[100%] flex-row">
