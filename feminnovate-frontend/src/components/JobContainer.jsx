@@ -30,12 +30,11 @@ const JobContainer = () => {
     }
 
     const redirectToJobDetails = () => {
-        const id = 1;
-        navigate(`jobs/${id}`);
+        navigate(`/jobs/3`);
     }
 
     return (
-        <div onClick={redirectToJobDetails} className="w-[100%] border-2 border-grey rounded-2xl cursor-pointer hover:bg-grey hover:bg-opacity-30">
+        <div className="w-[100%] border-2 border-grey rounded-2xl cursor-pointer hover:bg-grey hover:bg-opacity-30" onClick={redirectToJobDetails}>
             <div className="p-2">
                 <div className="h-[70%] rounded-t-2xl bg-pink bg-opacity-25 p-4">
                     <div className="flex w-[100%] flex-row">
