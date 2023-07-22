@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LandingNavbar from "../components/LandingNavbar";
-import SignUpModal from "../components/SignUpModal";
+import AuthenticationModal from "../components/AuthenticationModal";
 import background from "../assets/yellow-bg.png";
 import landingImage from "../assets/landing-img.png";
 import styles from "../style";
@@ -67,13 +67,13 @@ const LandingPage = () => {
             onClick={handleClose}
           ></div>
           <div className="w-1/4 h-auto z-20">
-            <SignUpModal
+            <AuthenticationModal
               openSignUpModal={openSignUpModal}
               openLogInModal={openLogInModal}
               handleOpenSignUpModal={handleOpenSignUpModal}
               handleOpenLogInModal={handleOpenLogInModal}
               handleCloseModal={handleClose}
-            ></SignUpModal>
+            ></AuthenticationModal>
           </div>
         </div>
       )}

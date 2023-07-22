@@ -5,14 +5,13 @@ import show from "../assets/show.png";
 import close from "../assets/close.png";
 import styles from "../style";
 
-const SignUpModal = ({
+const AuthenticationModal = ({
   openSignUpModal,
   openLogInModal,
   handleOpenSignUpModal,
   handleOpenLogInModal,
   handleCloseModal,
 }) => {
-  console.log(openSignUpModal);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -38,6 +37,24 @@ const SignUpModal = ({
 
   const toggleConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const resetFormValues = () => {
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setShowPassword(false);
+    setShowConfirmPassword(false);
+  };
+
+  const handleSwitchToLogIn = () => {
+    resetFormValues();
+    handleOpenLogInModal();
+  };
+
+  const handleSwitchToSignUp = () => {
+    resetFormValues();
+    handleOpenSignUpModal();
   };
 
   return (
@@ -137,7 +154,7 @@ const SignUpModal = ({
             <a
               className="text-blue underline underline-offset-2"
               href="#"
-              onClick={handleOpenLogInModal}
+              onClick={handleSwitchToLogIn}
             >
               Login here.
             </a>
@@ -148,7 +165,7 @@ const SignUpModal = ({
             <a
               className="text-blue underline underline-offset-2"
               href="#"
-              onClick={handleOpenSignUpModal}
+              onClick={handleSwitchToSignUp}
             >
               Sign up here.
             </a>
@@ -159,4 +176,4 @@ const SignUpModal = ({
   );
 };
 
-export default SignUpModal;
+export default AuthenticationModal;
