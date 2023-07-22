@@ -203,13 +203,13 @@ const AuthenticationModal = ({
         {openSignUpModal ? (
           <SwitchMessage
             question="Have an account?"
-            hypertext="Sign up here."
+            hypertext="Login here."
             onClick={handleSwitchToLogIn}
           />
         ) : (
           <SwitchMessage
             question="Don't have an account?"
-            hypertext="Login here."
+            hypertext="Sign up here."
             onClick={handleSwitchToSignUp}
           />
         )}
