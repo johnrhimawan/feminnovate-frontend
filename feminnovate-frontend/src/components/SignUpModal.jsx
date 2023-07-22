@@ -1,11 +1,16 @@
 import { useState } from "react";
 import logo from "../assets/logo.svg";
+import hide from "../assets/hide.png";
+import show from "../assets/show.png";
 import styles from "../style";
 
 const SignUpModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -17,6 +22,14 @@ const SignUpModal = () => {
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -47,13 +60,25 @@ const SignUpModal = () => {
         >
           Password
         </div>
-        <input
-          name="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          className="border border-grey rounded-md w-full h-14 mb-5 px-3 py-2"
-        ></input>
+        <div className="flex justify-center items-center mb-5 relative">
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={handlePasswordChange}
+            className="border border-grey rounded-md w-full h-14 pl-3 pr-12 py-2"
+          ></input>
+          <button
+            className="absolute right-0 ml-1 mr-3 px-1 items-center"
+            onClick={togglePassword}
+          >
+            {showPassword ? (
+              <img className="w-6" src={hide} />
+            ) : (
+              <img className="w-6" src={show} />
+            )}
+          </button>
+        </div>
       </div>
       <div className="flex flex-col w-[100%] items-left">
         <div
@@ -61,13 +86,25 @@ const SignUpModal = () => {
         >
           Confirm Password
         </div>
-        <input
-          name="confirmPassword"
-          type="password"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-          className="border border-grey rounded-md w-full h-14 mb-5 px-3 py-2"
-        ></input>
+        <div className="flex justify-center items-center mb-5 relative">
+          <input
+            name="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            className="border border-grey rounded-md w-full h-14 pl-3 pr-12 py-2"
+          ></input>
+          <button
+            className="absolute right-0 ml-1 mr-3 px-1 items-center"
+            onClick={toggleConfirmPassword}
+          >
+            {showConfirmPassword ? (
+              <img className="w-6" src={hide} />
+            ) : (
+              <img className="w-6" src={show} />
+            )}
+          </button>
+        </div>
       </div>
       <button
         className={`${styles.subheading4} bg-purple w-full px-12 py-3 my-5 border border-black rounded-full`}
