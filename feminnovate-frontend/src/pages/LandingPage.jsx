@@ -6,7 +6,27 @@ import landingImage from "../assets/landing-img.png";
 import styles from "../style";
 
 const LandingPage = () => {
+  const [openModal, setOpenModal] = useState(false);
   const [openSignUpModal, setOpenSignUpModal] = useState(false);
+  const [openLogInModal, setOpenLogInModal] = useState(false);
+
+  const handleClose = () => {
+    setOpenModal(false);
+    setOpenSignUpModal(false);
+    setOpenLogInModal(false);
+  };
+
+  const handleOpenSignUpModal = () => {
+    setOpenModal(true);
+    setOpenSignUpModal(true);
+    setOpenLogInModal(false);
+  };
+
+  const handleOpenLogInModal = () => {
+    setOpenModal(true);
+    setOpenLogInModal(true);
+    setOpenSignUpModal(false);
+  };
 
   return (
     <div className="h-screen flex flex-col">
@@ -24,13 +44,14 @@ const LandingPage = () => {
           </div>
           <div className="flex sm:flex-wrap justify-center gap-8">
             <button
-              onClick={() => setOpenSignUpModal(true)}
+              onClick={handleOpenSignUpModal}
               className={`${styles.subheading4} bg-purple w-[15%] px-12 py-3 my-10 border border-black rounded-full`}
               type="button"
             >
               Sign Up
             </button>
             <button
+              onClick={handleOpenLogInModal}
               className={`${styles.subheading4} w-[15%] px-12 py-3 my-10 border border-black rounded-full`}
               type="button"
             >
@@ -39,14 +60,20 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      {openSignUpModal && (
+      {openModal && (openSignUpModal || openLogInModal) && (
         <div className="flex fixed inset-0 h-full w-full justify-center items-center z-20">
           <div
             className="flex fixed inset-0 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm z-20"
-            onClick={() => setOpenSignUpModal(false)}
+            onClick={handleClose}
           ></div>
           <div className="w-1/4 h-auto z-20">
-            <SignUpModal></SignUpModal>
+            <SignUpModal
+              openSignUpModal={openSignUpModal}
+              openLogInModal={openLogInModal}
+              handleOpenSignUpModal={handleOpenSignUpModal}
+              handleOpenLogInModal={handleOpenLogInModal}
+              handleCloseModal={handleClose}
+            ></SignUpModal>
           </div>
         </div>
       )}
