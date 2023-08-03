@@ -1,12 +1,12 @@
 import "./App.css";
-import JobListingPage from "./pages/JobListingPage";
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
     <>
-      <LandingPage />
+      <ProfilePage />
     </>
   );
 }
