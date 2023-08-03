@@ -7,6 +7,10 @@ import close from "../assets/close.png";
 import styles from "../style";
 import axios from "axios";
 
+const onKeyDown = (event) => {
+  if (event.keyCode === 13) event.preventDefault();
+};
+
 const CloseButton = ({ onClick }) => {
   return (
     <button className="w-3 sm:w-4 h-3 sm:h-4 m-auto -mr-1" onClick={onClick}>
@@ -41,6 +45,7 @@ const Input = ({ label, id, name, type, value, onChange }) => {
         type={type}
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
         className="border border-grey rounded-md w-full h-12 px-3 py-2"
         required
       ></input>
@@ -73,6 +78,7 @@ const PasswordInput = ({
           type={type}
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           className="border border-grey rounded-md w-full h-12 pl-3 pr-12 py-2"
           required
         ></input>
