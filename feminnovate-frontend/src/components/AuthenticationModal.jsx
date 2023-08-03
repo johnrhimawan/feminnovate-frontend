@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import hide from "../assets/hide.png";
 import show from "../assets/show.png";
@@ -112,6 +113,8 @@ const AuthenticationModal = ({
   handleOpenLogInModal,
   handleCloseModal,
 }) => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -121,6 +124,8 @@ const AuthenticationModal = ({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+
+  const [signUpSuccessfulMessage, setSignUpSuccessfulMessage] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -164,11 +169,15 @@ const AuthenticationModal = ({
   };
 
   const resetFormValues = () => {
+    setName("");
+    setUsername("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
     setShowPassword(false);
     setShowConfirmPassword(false);
+    setErrorMessage("");
+    setSignUpSuccessfulMessage("");
   };
 
   const handleSwitchToLogIn = () => {
@@ -181,13 +190,64 @@ const AuthenticationModal = ({
     handleOpenSignUpModal();
   };
 
+  const handleSubmitSignUp = async (event) => {
+    event.preventDefault();
+
+    await axios
+      .post("http://localhost:8000/api/auth/register/", {
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+      })
+      .then((resp) => {
+        console.log("resp", resp.data);
+        localStorage.clear();
+        localStorage.setItem("token", resp.data.access);
+        handleOpenLogInModal();
+        setSignUpSuccessfulMessage(
+          "Account registered successfully. Please login."
+        );
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setErrorMessage(error.response.data.detail);
+      });
+  };
+
+  const handleSubmitLogIn = async (event) => {
+    event.preventDefault();
+
+    await axios
+      .post("http://localhost:8000/api/auth/login/", {
+        username: username,
+        password: password,
+      })
+      .then((resp) => {
+        console.log("resp", resp.data);
+        navigate("/jobs");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setErrorMessage(error.response.data.detail);
+      });
+  };
+
   return (
     <div className="flex flex-col w-full h-full bg-white rounded-3xl p-5 items-center justify-around">
       <div className="flex w-full h-full">
         <CloseButton onClick={handleCloseModal}></CloseButton>
       </div>
       <LogoWithTagline></LogoWithTagline>
-      <form className="auth-form">
+      <form
+        className="auth-form"
+        onSubmit={openSignUpModal ? handleSubmitSignUp : handleSubmitLogIn}
+      >
+        {openLogInModal && signUpSuccessfulMessage && (
+          <div className={`${styles.paragraph1} text-center text-blue mb-5`}>
+            {signUpSuccessfulMessage}
+          </div>
+        )}
         {openSignUpModal && (
           <Input
             label="Name"
@@ -198,24 +258,25 @@ const AuthenticationModal = ({
             onChange={handleNameChange}
           ></Input>
         )}
+        <Input
+          label="Username"
+          id="username"
+          name="username"
+          type="text"
+          value={username}
+          onChange={handleUsernameChange}
+        ></Input>
+
         {openSignUpModal && (
           <Input
-            label="Username"
-            id="username"
-            name="username"
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
+            label="Email"
+            id="email"
+            name="email"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
           ></Input>
         )}
-        <Input
-          label="Email"
-          id="email"
-          name="email"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-        ></Input>
         <PasswordInput
           label="Password"
           id="password"
