@@ -15,6 +15,11 @@ const ProfilePage = () => {
           <span className={`${styles.heading2} text-black`}>Interests</span>
           <div className="grid grid-cols-3 w-[100%] gap-5 mt-8">
             <InterestCard />
+            <InterestCard />
+            <InterestCard />
+            <InterestCard />
+            <InterestCard />
+            <InterestCard />
           </div>
         </div>
       </div>
