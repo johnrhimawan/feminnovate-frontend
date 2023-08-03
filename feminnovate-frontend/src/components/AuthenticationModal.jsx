@@ -202,8 +202,6 @@ const AuthenticationModal = ({
       })
       .then((resp) => {
         console.log("resp", resp.data);
-        localStorage.clear();
-        localStorage.setItem("token", resp.data.access);
         handleOpenLogInModal();
         setSignUpSuccessfulMessage(
           "Account registered successfully. Please login."
@@ -225,6 +223,8 @@ const AuthenticationModal = ({
       })
       .then((resp) => {
         console.log("resp", resp.data);
+        localStorage.clear();
+        localStorage.setItem("token", resp.data.access);
         navigate("/jobs");
       })
       .catch((error) => {
