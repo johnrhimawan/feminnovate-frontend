@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import DashboardPage from "./pages/DashboardPage.jsx";
 import JobListingPage from "./pages/JobListingPage.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
@@ -17,8 +18,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           path="/"
           element={
             <PublicRoute>
-              <App />
+              <LandingPage />
             </PublicRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            // <ProtectedRoute>
+            <DashboardPage />
+            // </ProtectedRoute>
           }
         />
         <Route
