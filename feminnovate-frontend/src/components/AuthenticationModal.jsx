@@ -6,6 +6,7 @@ import show from "../assets/show.png";
 import close from "../assets/close.png";
 import styles from "../style";
 import axios from "axios";
+import { API_URL } from "../constants";
 
 const onKeyDown = (event) => {
   if (event.keyCode === 13) event.preventDefault();
@@ -200,7 +201,7 @@ const AuthenticationModal = ({
     event.preventDefault();
 
     await axios
-      .post("http://localhost:8000/api/auth/register/", {
+      .post(`${API_URL}api/auth/register/`, {
         name: name,
         username: username,
         email: email,
@@ -208,6 +209,7 @@ const AuthenticationModal = ({
       })
       .then((resp) => {
         console.log("resp", resp.data);
+        resetFormValues();
         handleOpenLogInModal();
         setSignUpSuccessfulMessage(
           "Account registered successfully. Please login."
@@ -223,7 +225,7 @@ const AuthenticationModal = ({
     event.preventDefault();
 
     await axios
-      .post("http://localhost:8000/api/auth/login/", {
+      .post(`${API_URL}api/auth/login/`, {
         username: username,
         password: password,
       })
