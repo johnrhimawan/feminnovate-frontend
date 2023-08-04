@@ -232,6 +232,7 @@ const AuthenticationModal = ({
       .then((resp) => {
         console.log("resp", resp.data);
         localStorage.clear();
+        localStorage.setItem("username", resp.data.username);
         localStorage.setItem("token", resp.data.access);
         navigate("/jobs");
       })
