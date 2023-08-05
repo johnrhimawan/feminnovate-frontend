@@ -14,14 +14,14 @@ const ProfileCard = () => {
       </div>
       <div className="mt-8 text-center flex flex-col">
         <span className={`${styles.subheading2} text-black text-[28px]`}>Karina</span>
-        <span className={`${styles.subheading7} text-black text-opacity-40 text-[16px] mt-1`}>English Teacher</span>
-        <div className="flex items-center justify-center mt-1">
+        <span className={`${styles.subheading7} text-black text-opacity-40 text-[14px] mt-0.5`}>English Teacher</span>
+        <div className="flex items-center justify-center">
           <img
             className="mr-2"
             src={locationmarker}
             alt="Location Marker"
           />
-          <span className={`${styles.subheading7} text-black text-opacity-40 text-[16px]`}>Random School, Japan</span>
+          <span className={`${styles.subheading7} text-black text-opacity-40 text-[14px] mt-0.5`}>Random School, Japan</span>
         </div>
       </div>
       <div className="mt-8 flex flex-col justify-center">
