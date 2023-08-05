@@ -25,6 +25,8 @@ export default {
       'grey': '#D9D9D9',
       'hyperlink': '#256EFF',
       'dark-grey': '#656565',
+      'blue-accent': '#7A92CF',
+      'yellow-accent': '#CEB36C',
     },
     fontFamily: {
       'sans': ['Inter', 'sans-serif']

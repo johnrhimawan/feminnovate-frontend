@@ -6,7 +6,7 @@ import ProfilePage from "./pages/ProfilePage";
 function App() {
   return (
     <>
-      <LandingPage />
+      <LandingPage/>
     </>
   );
 }

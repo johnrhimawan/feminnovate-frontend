@@ -8,6 +8,7 @@ import "./index.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JobDetailsPage from "./pages/JobDetailsPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -34,6 +35,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           element={
             <ProtectedRoute>
               <JobDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           }
         />

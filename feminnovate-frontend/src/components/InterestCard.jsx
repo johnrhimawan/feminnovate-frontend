@@ -1,12 +1,12 @@
-import React from "react";
 import stripe from "../assets/stripe.svg";
+import styles from "../style";
 
 const InterestCard = () => {
   return (
-    <div className="w-full border-2 border-grey rounded-2xl flex flex-col items-center p-4 bg-indigo-200">
+    <div className="w-full border-2 border-grey rounded-2xl flex flex-col items-center py-20 bg-blue bg-opacity-25">
       <img src={stripe} className="mx-auto" alt="TCS" />
-      <h1 className="text-2xl font-bold mt-4">Stripe Accountancy</h1>
-      <p className="text-gray-300 text-sm mt-2">Stripe</p>
+      <span className={`${styles.subheading2} text-black mt-8`}>Stripe Accountancy</span>
+      <span className={`${styles.subheading7}`}>Stripe</span>
     </div>
   );
 };
