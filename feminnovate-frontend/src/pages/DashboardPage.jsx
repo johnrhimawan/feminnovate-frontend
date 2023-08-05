@@ -37,8 +37,8 @@ const DashboardPage = () => {
       <Navbar />
       <div className="flex flex-col px-24 pb-12 gap-10">
         <div className={`${styles.heading1} text-black`}>Hello, {name}</div>
-        <div className="flex flex-row overflow-hidden p-5 gap-5 bg-purple/25 justify-between rounded-xl">
-          <div className="flex flex-col w-[49%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
+        <div className="flex flex-col overflow-hidden p-5 gap-5 bg-purple/25 justify-between rounded-xl">
+          <div className="flex flex-col w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
             <div className={`${styles.subheading2} text-black mb-3`}>
               Saved jobs
             </div>
@@ -63,7 +63,7 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col flex-none w-[49%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
+          <div className="flex flex-col flex-none w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
             <div className={`${styles.subheading2} text-black mb-3`}>
               Saved workshops
             </div>
