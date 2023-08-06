@@ -13,7 +13,7 @@ const Navbar = () => {
                     <a href="/jobs" className="transition-all hover:font-extrabold my-auto">
                         Jobs
                     </a>
-                    <a href="#" className="transition-all hover:font-extrabold my-auto">
+                    <a href="/events" className="transition-all hover:font-extrabold my-auto">
                         Events
                     </a>
                     <a href="#" className="transition-all hover:font-extrabold my-auto">
