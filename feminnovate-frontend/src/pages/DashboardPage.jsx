@@ -4,6 +4,37 @@ import styles from "../style";
 import axios from "axios";
 import { API_URL } from "../constants.js";
 import JobContainer from "../components/JobContainer";
+import noData from "../assets/no-data.svg";
+
+const components = {
+  JobContainer,
+};
+
+const InnerCard = ({ title, message, desc, itemValue, itemComponentName }) => {
+  const ItemComponent = components[itemComponentName];
+  return (
+    <div className="flex flex-col w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
+      <div className={`${styles.subheading2} text-black mb-3`}>{title}</div>
+      {itemValue.length > 0 ? (
+        <div className="flex overflow-x-scroll hide-scroll-bar gap-5">
+          {itemValue.map((item) => (
+            <div className="flex-none w-[400px]">
+              <ItemComponent id={item} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col justify-center items-center">
+          <img src={noData} className="w-64 my-10" />
+          <div className={`${styles.subheading2} mb-1`}>{message}</div>
+          <div className={`${styles.subheading4} mb-5 text-black/50`}>
+            {desc}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const DashboardPage = () => {
   const [username, setUsername] = useState(localStorage.getItem("username"));
@@ -62,58 +93,38 @@ const DashboardPage = () => {
         <div className={`${styles.heading1} text-black`}>Hello, {name}</div>
         <div></div>
         <div className="flex flex-col overflow-hidden p-5 gap-5 bg-purple/25 justify-between rounded-xl">
-          <div className="flex flex-col w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
-            <div className={`${styles.subheading2} text-black mb-3`}>
-              Saved jobs
-            </div>
-            <div className="flex overflow-x-scroll hide-scroll-bar gap-5">
-              {savedJobs.map((savedJob) => (
-                <div className="flex-none w-[400px]">
-                  <JobContainer />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col flex-none w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
-            <div className={`${styles.subheading2} text-black mb-3`}>
-              Saved workshops
-            </div>
-            <div className="flex overflow-x-scroll hide-scroll-bar gap-5">
-              {savedWorkshops.map((savedWorkshop) => (
-                <div className="flex-none w-[400px]">
-                  <JobContainer />
-                </div>
-              ))}
-            </div>
-          </div>
+          <InnerCard
+            title="Saved jobs"
+            message="No jobs saved yet"
+            desc="Your saved jobs will appear here."
+            itemValue={savedJobs}
+            itemComponentName="JobContainer"
+          ></InnerCard>
+          <InnerCard
+            title="Saved workshops"
+            message="No workshops saved yet"
+            desc="Your saved workshops will appear here."
+            itemValue={savedWorkshops}
+            itemComponentName="JobContainer"
+          ></InnerCard>
         </div>
         <div className="flex flex-row overflow-hidden p-5 gap-5 bg-yellow/25 justify-between rounded-xl">
-          <div className="flex flex-col w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
-            <div className={`${styles.subheading2} text-black mb-3`}>
-              Upcoming workshops
-            </div>
-            <div className="flex overflow-x-scroll hide-scroll-bar gap-5">
-              {upcomingWorkshops.map((workshop) => (
-                <div className="flex-none w-[400px]">
-                  <JobContainer />
-                </div>
-              ))}
-            </div>
-          </div>
+          <InnerCard
+            title="Upcoming workshops"
+            message="There are no upcoming workshops"
+            desc="Upcoming workshops will appear here."
+            itemValue={upcomingWorkshops}
+            itemComponentName="JobContainer"
+          ></InnerCard>
         </div>
         <div className="flex flex-row overflow-hidden p-5 gap-5 bg-blue/25 justify-between rounded-xl">
-          <div className="flex flex-col w-[100%] h-[100%] p-6 rounded rounded-xl items-stretch shadow-xl bg-white">
-            <div className={`${styles.subheading2} text-black mb-3`}>
-              Companies you might be interested in
-            </div>
-            <div className="flex overflow-x-scroll hide-scroll-bar gap-5">
-              {companies.map((company) => (
-                <div className="flex-none w-[400px]">
-                  <JobContainer />
-                </div>
-              ))}
-            </div>
-          </div>
+          <InnerCard
+            title="Companies you might be interested in"
+            message="No companies found"
+            desc="Recommended companies will appear here."
+            itemValue={companies}
+            itemComponentName="JobContainer"
+          ></InnerCard>
         </div>
       </div>
     </>
