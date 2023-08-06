@@ -9,6 +9,7 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JobDetailsPage from "./pages/JobDetailsPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import WorkshopListingPage from "./pages/WorkshopListingPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -43,6 +44,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           element={
             <ProtectedRoute>
               <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <ProtectedRoute>
+              <WorkshopListingPage />
             </ProtectedRoute>
           }
         />
