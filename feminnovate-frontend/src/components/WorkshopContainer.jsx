@@ -8,8 +8,8 @@ const WorkshopContainer = () => {
 
     const navigate = useNavigate();
 
-    const redirectToJobDetails = () => {
-        navigate(`/jobs/3`);
+    const redirectToWorkshopDetails = () => {
+        navigate(`/workshops/3`);
     }
 
     return (
@@ -18,7 +18,7 @@ const WorkshopContainer = () => {
                 border-2 border-grey rounded-2xl cursor-pointer 
                 py-20 flex-col
                 hover:bg-grey hover:bg-opacity-30 bg-blue bg-opacity-25" 
-            onClick={redirectToJobDetails}>
+            onClick={redirectToWorkshopDetails}>
             <img src={stripe}/>
             <span className={`${styles.subheading2} mt-4 text-center`}>Computer Security Workshop</span>
             <div className="flex flex-row items-center mt-2">

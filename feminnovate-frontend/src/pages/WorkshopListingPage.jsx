@@ -17,6 +17,14 @@ const WorkshopListingPage = () => {
                     </span>
                     <div className="grid lg:grid-cols-3 w-[100%] gap-5 mt-8 md:grid-cols-2 xs:grid-cols-1">
                         <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
+                        <WorkshopContainer/>
                     </div>
                 </div>
             </div>
