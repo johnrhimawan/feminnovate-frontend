@@ -10,7 +10,6 @@ import { parseLastModified } from "../utils";
 const JobContainer = (props) => {
 
     const navigate = useNavigate();
-    const templateText = "We are seeking a skilled and dynamic Full Stack Developer to join our team. As a Full Stack Developer, you will be responsible for designing, developing, and implementing web applications that encompass both the front-end and back-end components. You will work closely with cross-functional teams, including designers, product managers, and software engineers, to create innovative and user-friendly digital solutions."
 
     /**
      * Cuts off a paragraph with more than 150 characters and adds an ellipsis
