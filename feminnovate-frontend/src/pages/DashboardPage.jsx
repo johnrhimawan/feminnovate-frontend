@@ -4,13 +4,13 @@ import styles from "../style";
 import axios from "axios";
 import { API_URL } from "../constants.js";
 import JobContainer from "../components/JobContainer";
-import InterestCard from "../components/InterestCard";
+import WorkshopContainer from "../components/WorkshopContainer";
 import noData from "../assets/no-data.svg";
 import moment from "moment";
 
 const components = {
   JobContainer,
-  InterestCard,
+  WorkshopContainer,
 };
 
 const InnerCard = ({ title, message, desc, itemValue, itemComponentName }) => {
@@ -124,7 +124,7 @@ const DashboardPage = () => {
             message="No workshops saved yet"
             desc="Your saved workshops will appear here."
             itemValue={savedWorkshops}
-            itemComponentName="JobContainer"
+            itemComponentName="WorkshopContainer"
           ></InnerCard>
         </div>
         <div className="flex flex-row overflow-hidden p-5 gap-5 bg-yellow/25 justify-between rounded-xl">
@@ -133,10 +133,10 @@ const DashboardPage = () => {
             message="There are no upcoming workshops"
             desc="Upcoming workshops will appear here."
             itemValue={upcomingWorkshops}
-            itemComponentName="JobContainer"
+            itemComponentName="WorkshopContainer"
           ></InnerCard>
         </div>
-        <div className="flex flex-row overflow-hidden p-5 gap-5 bg-blue/25 justify-between rounded-xl">
+        {/* <div className="flex flex-row overflow-hidden p-5 gap-5 bg-blue/25 justify-between rounded-xl">
           <InnerCard
             title="Companies you might be interested in"
             message="No companies found"
@@ -144,7 +144,7 @@ const DashboardPage = () => {
             itemValue={companies}
             itemComponentName="InterestCard"
           ></InnerCard>
-        </div>
+        </div> */}
       </div>
     </>
   );
