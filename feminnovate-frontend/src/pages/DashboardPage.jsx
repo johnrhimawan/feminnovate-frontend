@@ -72,7 +72,7 @@ const DashboardPage = () => {
         setUpcomingWorkshops(
           resp.data
             .filter((x) => {
-              return x.start_time <= moment().format("YYYY-MM-DD");
+              return moment().format("YYYY-MM-DD") <= x.start_time;
             })
             .map((x) => x.id)
         );
