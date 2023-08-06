@@ -6,6 +6,7 @@ import { API_URL } from "../constants.js";
 import JobContainer from "../components/JobContainer";
 import InterestCard from "../components/InterestCard";
 import noData from "../assets/no-data.svg";
+import moment from "moment";
 
 const components = {
   JobContainer,
@@ -68,7 +69,13 @@ const DashboardPage = () => {
     await axios
       .get(`${API_URL}api/workshop/`, { headers: headers })
       .then((resp) => {
-        setUpcomingWorkshops(resp.data.map((x) => x.id));
+        setUpcomingWorkshops(
+          resp.data
+            .filter((x) => {
+              return x.start_time <= moment().format("YYYY-MM-DD");
+            })
+            .map((x) => x.id)
+        );
       })
       .catch((error) => {
         console.log(error);
