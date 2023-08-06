@@ -22,7 +22,7 @@ const InnerCard = ({ title, message, desc, itemValue, itemComponentName }) => {
         <div className="flex overflow-x-scroll hide-scroll-bar gap-5">
           {itemValue.map((item) => (
             <div className="flex-none w-[400px]">
-              <ItemComponent id={item} />
+              <ItemComponent data={item} />
             </div>
           ))}
         </div>
@@ -52,15 +52,31 @@ const DashboardPage = () => {
   const [companies, setCompanies] = useState([]);
 
   const getUser = async () => {
-    console.log("hi");
-
     await axios
       .get(`${API_URL}api/user/${username}/`, { headers: headers })
       .then((resp) => {
         setName(resp.data.name);
-        setSavedJobs(resp.data.saved_jobs);
         setSavedExperiences(resp.data.saved_experiences);
-        setSavedWorkshops(resp.data.saved_workshops);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await axios
+      .get(`${API_URL}api/user/${username}/saved_jobs/`, { headers: headers })
+      .then((resp) => {
+        setSavedJobs(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await axios
+      .get(`${API_URL}api/user/${username}/saved_workshops/`, {
+        headers: headers,
+      })
+      .then((resp) => {
+        setSavedWorkshops(resp.data);
       })
       .catch((error) => {
         console.log(error);
@@ -81,14 +97,14 @@ const DashboardPage = () => {
         console.log(error);
       });
 
-    await axios
-      .get(`${API_URL}api/company/`, { headers: headers })
-      .then((resp) => {
-        setCompanies(resp.data.map((x) => x.id));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // await axios
+    //   .get(`${API_URL}api/company/`, { headers: headers })
+    //   .then((resp) => {
+    //     setCompanies(resp.data.map((x) => x.id));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   useEffect(() => {
