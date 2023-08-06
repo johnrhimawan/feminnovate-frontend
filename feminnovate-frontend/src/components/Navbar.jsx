@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import logo from "../assets/logo.svg";
 import avatar from "../assets/avatar.svg";
 
@@ -20,13 +19,18 @@ const Navbar = () => {
           >
             Jobs
           </a>
-          <a href="#" className="transition-all hover:font-extrabold my-auto">
+          <a
+            href="/events"
+            className="transition-all hover:font-extrabold my-auto"
+          >
             Events
           </a>
           <a href="#" className="transition-all hover:font-extrabold my-auto">
             Forum
           </a>
-          <img src={avatar} />
+          <a href="/profile">
+            <img src={avatar} />
+          </a>
         </div>
       </div>
     </nav>
