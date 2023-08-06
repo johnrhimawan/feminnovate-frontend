@@ -4,10 +4,12 @@ import styles from "../style";
 import axios from "axios";
 import { API_URL } from "../constants.js";
 import JobContainer from "../components/JobContainer";
+import InterestCard from "../components/InterestCard";
 import noData from "../assets/no-data.svg";
 
 const components = {
   JobContainer,
+  InterestCard,
 };
 
 const InnerCard = ({ title, message, desc, itemValue, itemComponentName }) => {
@@ -90,7 +92,17 @@ const DashboardPage = () => {
     <>
       <Navbar />
       <div className="flex flex-col px-24 pb-12 gap-10">
-        <div className={`${styles.heading1} text-black`}>Hello, {name}</div>
+        <div className={`${styles.heading1} text-black`}>Hello, {name}!</div>
+        <div className={`${styles.subheading3} text-black/50 -mb-8 -mt-4`}>
+          "Women have the power to revolutionize STEM fields and leave an
+          indelible mark on the world." - Margaret Hamilton
+        </div>
+        <div className={`${styles.subheading3} text-black/50 -mb-9`}>
+          Apply for your saved{" "}
+          <span className={`${styles.subheading4} text-black`}>jobs</span> and{" "}
+          <span className={`${styles.subheading4} text-black`}>workshops</span>{" "}
+          now!
+        </div>
         <div></div>
         <div className="flex flex-col overflow-hidden p-5 gap-5 bg-purple/25 justify-between rounded-xl">
           <InnerCard
@@ -123,7 +135,7 @@ const DashboardPage = () => {
             message="No companies found"
             desc="Recommended companies will appear here."
             itemValue={companies}
-            itemComponentName="JobContainer"
+            itemComponentName="InterestCard"
           ></InnerCard>
         </div>
       </div>
