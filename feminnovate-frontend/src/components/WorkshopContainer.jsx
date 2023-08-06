@@ -9,7 +9,7 @@ const WorkshopContainer = () => {
     const navigate = useNavigate();
 
     const redirectToWorkshopDetails = () => {
-        navigate(`/workshops/3`);
+        navigate(`/events/3`);
     }
 
     return (
@@ -23,11 +23,11 @@ const WorkshopContainer = () => {
             <span className={`${styles.subheading2} mt-4 text-center`}>Computer Security Workshop</span>
             <div className="flex flex-row items-center mt-2">
                 <img src={calendar} className="mr-1.5"/>
-                <span>Thursday, 25 April 2023</span>
+                <span className={`${styles.subheading5} text-[16px]`}>Thursday, 25 April 2023</span>
             </div>
             <div className="flex flex-row items-center mt-2">
                 <img src={location} className="mr-1.5"/>
-                <span>Online</span>
+                <span className={`${styles.subheading5} text-[16px]`}>Online</span>
             </div>
         </div>
     )
