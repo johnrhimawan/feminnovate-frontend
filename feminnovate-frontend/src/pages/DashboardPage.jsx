@@ -93,7 +93,7 @@ const DashboardPage = () => {
       <Navbar />
       <div className="flex flex-col px-24 pb-12 gap-10">
         <div className={`${styles.heading1} text-black`}>Hello, {name}!</div>
-        <div className={`${styles.subheading3} text-black/50 -mb-8 -mt-4`}>
+        <div className={`${styles.subheading3} text-black/50 -my-8`}>
           "Women have the power to revolutionize STEM fields and leave an
           indelible mark on the world." - Margaret Hamilton
         </div>
