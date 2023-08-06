@@ -234,7 +234,7 @@ const AuthenticationModal = ({
         localStorage.clear();
         localStorage.setItem("username", resp.data.username);
         localStorage.setItem("token", resp.data.access);
-        navigate("/jobs");
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error.response.data);
