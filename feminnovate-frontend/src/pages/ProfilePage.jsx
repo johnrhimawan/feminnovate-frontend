@@ -6,6 +6,8 @@ import axios from "axios";
 import { API_URL } from "../constants";
 import EditProfileModal from "../components/EditProfileModal";
 import JobContainer from "../components/JobContainer";
+import no_data from "../assets/no-data.svg"
+import WorkshopContainer from "../components/WorkshopContainer";
 
 const ProfilePage = () => {
 
@@ -58,14 +60,15 @@ const ProfilePage = () => {
         setLocation(response.data.location);
       }
 
-      retrieveSavedJobs()
-      retrieveSavedWorkshops()
-      if (response.data.saved_jobs !== []) {
-        
-      }
       
-      setWorkshops(response.data.saved_workshops);
+      
+      if (response.data.saved_jobs.length !== 0) {
+        retrieveSavedJobs()
+      }
 
+      if (response.data.saved_workshops.length !== 0) {
+        retrieveSavedWorkshops()
+      }
     }).catch( err => {
       console.log(err);
     })
@@ -77,7 +80,7 @@ const ProfilePage = () => {
         "Authorization": `Bearer ${userToken}`,
       }
     }).then(response => {
-      console.log(response)
+      setCompanies(response.data)
     }).catch(err => {
       console.log(err)
     })
@@ -89,7 +92,7 @@ const ProfilePage = () => {
         "Authorization": `Bearer ${userToken}`,
       }
     }).then(response => {
-      console.log(response)
+      setWorkshops(response.data)
     }).catch(err => {
       console.log(err)
     })
@@ -125,16 +128,31 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 w-[100%] gap-5 mt-8">
-            {companiesSelected? (
-              companies.map((job) => {
-                return (
-                  <JobContainer key={job}/>
-                )
-              }
-            )) : null}
-            {workshopsSelected? null: null}
-          </div>
+          {companies.length === 0? 
+              <div className="flex flex-col justify-center items-center">
+                <img src={no_data} className="w-64 mt-20 mb-10"/>
+                <div className={`${styles.subheading2} mb-1`}>{`No ${companiesSelected? "jobs" : workshopsSelected? "workshops" : null} saved yet`}</div>
+                <div className={`${styles.subheading4} mb-5 text-black/50`}>{`Your saved ${companiesSelected? "jobs" : workshopsSelected? "workshops" : null} will appear here.`} </div>
+              </div>
+              : 
+              <div className="grid grid-cols-3 w-[100%] gap-5 mt-8">
+            
+              {companiesSelected? (
+                companies.map((job) => {
+                  return (
+                    <JobContainer data={job} key={job}/>
+                  )
+                }
+              )) : null}
+              {workshopsSelected? (
+                workshops.map(workshop => {
+                  return (
+                    <WorkshopContainer data={workshop} key={workshop}/>
+                  )
+                })
+              ): null}
+            </div>
+            }
         </div>
       </div>
     </>
