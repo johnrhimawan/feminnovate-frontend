@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 import Navbar from "../components/Navbar";
 import tcs from '../assets/tcs.png'
 import styles from "../style";
@@ -7,105 +8,124 @@ import location from '../assets/map-marker.png'
 import clock from '../assets/clock.png'
 import redirect from '../assets/redirect.png'
 import back from '../assets/back.png'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import { API_URL } from "../constants";
+import { parseLastModified } from "../utils";
 
 const JobDetailsPage = () => {
 
+    const { id } = useParams();
     const navigate = useNavigate();
 
-    const templateDesc = "We are seeking a skilled and dynamic Full Stack Developer to join our team. As a Full Stack Developer, you will be responsible for designing, developing, and implementing web applications that encompass both the front-end and back-end components. You will work closely with cross-functional teams, including designers, product managers, and software engineers, to create innovative and user-friendly digital solutions."
-
-    const templateResponsibilities = '\u2022 ' + "Collaborate with the team to conceptualize, plan, and develop robust web applications with a focus on both front-end and back-end technologies.\n" +
-            '\u2022 ' + "Design and implement intuitive and visually appealing user interfaces using modern web technologies such as HTML, CSS, and JavaScript frameworks (e.g., React, Angular, Vue.js).\n" + 
-            '\u2022 ' + "Develop and maintain server-side components, APIs, and databases using appropriate programming languages (e.g., Python, Java, Node.js) and frameworks (e.g., Django, Spring, Express).\n" + 
-            '\u2022 ' + "Design and optimize database structures, create efficient queries, and ensure data integrity."
+    const [loaded, setLoaded] = useState(false);
+    const [details, setDetails] = useState({})
     
-    const templateQualifications = '\u2022 ' + "Bachelor's degree in Computer Science, Software Engineering, or a related field. Equivalent practical experience will also be considered.\n" +
-            '\u2022 ' + "Proven experience working as a Full Stack Developer or in a similar role, with a strong portfolio demonstrating successful project deliveries.\n" + 
-            '\u2022 ' + "Proficiency in front-end technologies (HTML, CSS, JavaScript, etc.) and modern frameworks (React, Angular, etc.). Strong understanding of back-end development using programming languages (Python, Java, etc.) and frameworks (Django, Spring, etc.). Familiarity with database management (SQL, NoSQL) and version control systems (Git).\n" + 
-            '\u2022 ' + "Excellent problem-solving and analytical skills, with the ability to analyze complex technical challenges and propose effective solutions.\n"
-            '\u2022 ' + "Strong team player with excellent communication and interpersonal skills. Ability to work collaboratively in a cross-functional environment.\n"
-            '\u2022 ' + "Continuous Learning: Self-motivated and proactive in staying up-to-date with industry trends, best practices, and emerging technologies."
+    const fetchDetails = () => {
+        axios.get(`${API_URL}api/job/${id}/`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
+        }).then((res) => {
+            setDetails(res.data);
+            setLoaded(true);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
     
     const goBack = () => {
         navigate('/jobs');
     }
 
-    return (
-        <>
-            <Navbar/>
-            <div className="w-[100%] px-20 mt-2 mb-10">
-                <div className="flex items-center mb-8 cursor-pointer" onClick={goBack}>
-                    <img src={back} className="w-4"/>
-                    <p className={`${styles.subheading4} text-black text-opacity-40 ml-2 hover:text-opacity-60`}>Back</p>
-                </div>
+    useEffect(() => {
+        fetchDetails();
+    }, [])
 
-                <div className="w-[7.5%]">
-                    <img src={tcs} className="w-[100%]"/>
-                </div>
-                <div className="mt-8">
-                    <p className={`${styles.subheading2} underline text-hyperlink`}>Tata Consultancy Services</p>
-                    <p className={`${styles.heading2} text-black my-2`}>Full Stack Developer</p>
-                </div>
+    if (loaded) {
+        console.log(details)
+        return (
+            <>
+                <Navbar/>
+                <div className="w-[100%] px-20 mt-2 mb-10">
+                    <div className="flex items-center mb-8 cursor-pointer" onClick={goBack}>
+                        <img src={back} className="w-4"/>
+                        <p className={`${styles.subheading4} text-black text-opacity-40 ml-2 hover:text-opacity-60`}>Back</p>
+                    </div>
 
-                <div className="my-4">
-                    <div className="flex flex-row">
-                        <div className="w-[2%] flex justify-start">
-                            <img src={briefcase} className=""/>
+                    <div className="w-[7.5%]">
+                        <img src={details.company.picture} className="w-[100%]"/>
+                    </div>
+                    <div className="mt-8">
+                        <a href={details.company.website} target="_blank">
+                            <p className={`${styles.subheading2} underline text-hyperlink`}>{details.company.name}</p>
+                        </a>
+                        <p className={`${styles.heading2} text-black my-2`}>{details.title}</p>
+                    </div>
+
+                    <div className="my-4">
+                        <div className="flex flex-row">
+                            <div className="w-[2%] flex justify-start">
+                                <img src={briefcase} className=""/>
+                            </div>
+                            <span className={`${styles.subheading7} ml-1 text-black`}>{details.job_type}</span>
                         </div>
-                        <span className={`${styles.subheading7} ml-1 text-black`}>Full-time</span>
-                    </div>
-                    <div className="flex flex-row">
-                        <div className="w-[2%] flex justify-start">
-                            <img src={location}/>
+                        <div className="flex flex-row">
+                            <div className="w-[2%] flex justify-start">
+                                <img src={location}/>
+                            </div>
+                            <span className={`${styles.subheading7} ml-1 text-black`}>{details.location}</span>
                         </div>
-                        <span className={`${styles.subheading7} ml-1 text-black`}>Singapore</span>
-                    </div>
-                    <div className="flex flex-row">
-                        <div className="w-[2%] flex justify-start">
-                            <img src={cash}/>
+                        <div className="flex flex-row">
+                            <div className="w-[2%] flex justify-start">
+                                <img src={cash}/>
+                            </div>
+                            <span className={`${styles.subheading7} ml-1 text-black`}>{details.salary ? "$" + details.salary + "/mo" : "Company prefers to disclose"}</span>
                         </div>
-                        <span className={`${styles.subheading7} ml-1 text-black`}>$6,000/mo</span>
                     </div>
-                </div>
 
-                <div className="flex justify-between">
-                    <div className="rounded-3xl border-grey border flex items-center py-1 px-3">
-                        <img src={clock} className="w-6 h-6"/>
-                        <span className={`${styles.subheading7} text-dark-grey ml-1`}>10 hrs ago</span>
+                    <div className="flex justify-between">
+                        <div className="rounded-3xl border-grey border flex items-center py-1 px-3">
+                            <img src={clock} className="w-6 h-6"/>
+                            <span className={`${styles.subheading7} text-dark-grey ml-1`}>{parseLastModified(details.updated_at)}</span>
+                        </div>
+                        <div className="flex items-center">
+                            <button className="flex items-center py-1 px-4 bg-purple bg-opacity-25 rounded-3xl border border-grey mr-2 hover:bg-opacity-50">
+                                <a href={details.company.website} target="_blank">
+                                    <span className="mr-2">Apply</span>
+                                </a>
+                                <img src={redirect}/>
+                            </button>
+                            <button className="py-1 px-4 rounded-3xl border border-grey mr-2 hover:bg-opacity-25 hover:bg-black">Save</button>
+                        </div>
                     </div>
-                    <div className="flex items-center">
-                        <button className="flex items-center py-1 px-4 bg-purple bg-opacity-25 rounded-3xl border border-grey mr-2 hover:bg-opacity-50">
-                            <span className="mr-2">Apply</span>
-                            <img src={redirect}/>
-                        </button>
-                        <button className="py-1 px-4 rounded-3xl border border-grey mr-2 hover:bg-opacity-25 hover:bg-black">Save</button>
-                    </div>
-                </div>
 
-                <div className="mt-8">
-                    <div className={`w-[100%] bg-pink bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
-                        <p className={`${styles.subheading2} text-black mb-2`}>Description</p>
-                        <p className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>{templateDesc}</p>
+                    <div className="mt-8">
+                        <div className={`w-[100%] bg-pink bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
+                            <p className={`${styles.subheading2} text-black mb-2`}>Description</p>
+                            <p className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>{details.description}</p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="mt-8">
-                    <div className={`w-[100%] bg-yellow bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
-                        <p className={`${styles.subheading2} text-black mb-2`}>Responsibilities</p>
-                        <p className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>{templateResponsibilities}</p>
+                    <div className="mt-8">
+                        <div className={`w-[100%] bg-yellow bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
+                            <p className={`${styles.subheading2} text-black mb-2`}>Responsibilities</p>
+                            <p className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>{details.responsibilities}</p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="mt-8">
-                    <div className={`w-[100%] bg-blue bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
-                        <p className={`${styles.subheading2} text-black mb-2`}>Qualifications</p>
-                        <p className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>{templateQualifications}</p>
+                    <div className="mt-8">
+                        <div className={`w-[100%] bg-blue bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
+                            <p className={`${styles.subheading2} text-black mb-2`}>Qualifications</p>
+                            <p className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>{details.qualifications}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    } else {
+        return null;
+    }
 }
 
 export default JobDetailsPage;

@@ -5,6 +5,7 @@ import cash from '../assets/cash.png'
 import location from '../assets/map-marker.png'
 import clock from '../assets/clock.png'
 import { useNavigate } from 'react-router-dom'
+import { parseLastModified } from "../utils";
 
 const JobContainer = (props) => {
 
@@ -30,7 +31,7 @@ const JobContainer = (props) => {
     }
 
     const redirectToJobDetails = () => {
-        navigate(`/jobs/3`);
+        navigate(`/jobs/${props.data.id}`);
     }
 
     return (
@@ -65,11 +66,11 @@ const JobContainer = (props) => {
                     <div className="mt-5 flex justify-between">
                         <div className="bg-white rounded-3xl py-0.5 px-2.5 flex flex-row items-center">
                             <img src={clock} className="w-[20px] h-[20px]"/>
-                            <span className={`${styles.subheading6} text-dark-grey ml-1`}> 10 hrs ago</span>
+                            <span className={`${styles.subheading6} text-dark-grey ml-1`}>{parseLastModified(props.data.updated_at)}</span>
                         </div>
-                        <div className="bg-white rounded-3xl px-5 py-0.5 items-center justify-center">
-                            <span className={`${styles.subheading6} text-black ml-1`}>Save</span>
-                        </div>
+                        {/* <div className="bg-white rounded-3xl px-5 py-0.5 items-center justify-center">
+                            <button className={`${styles.subheading6} z-20 text-black ml-1`} onClick={() => console.log("hello")}>Save</button>
+                        </div> */}
                     </div>
                 </div>
 
