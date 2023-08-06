@@ -4,12 +4,12 @@ import stripe from '../assets/stripe.svg'
 import calendar from '../assets/calendar.png'
 import location from '../assets/location-marker-2.png'
 
-const WorkshopContainer = () => {
+const WorkshopContainer = (props) => {
 
     const navigate = useNavigate();
 
     const redirectToWorkshopDetails = () => {
-        navigate(`/events/3`);
+        navigate(`/events/${props.data.id}`);
     }
 
     return (
@@ -19,15 +19,15 @@ const WorkshopContainer = () => {
                 py-20 flex-col
                 hover:bg-grey hover:bg-opacity-30 bg-blue bg-opacity-25" 
             onClick={redirectToWorkshopDetails}>
-            <img src={stripe}/>
-            <span className={`${styles.subheading2} mt-4 text-center`}>Computer Security Workshop</span>
+            <img src={props.data.organizer.picture} className="w-20 h-20"/>
+            <span className={`${styles.subheading2} mt-4 text-center`}>{props.data.title}</span>
             <div className="flex flex-row items-center mt-2">
                 <img src={calendar} className="mr-1.5"/>
-                <span className={`${styles.subheading5} text-[16px]`}>Thursday, 25 April 2023</span>
+                <span className={`${styles.subheading5} text-[16px]`}>{props.data.start_time}</span>
             </div>
             <div className="flex flex-row items-center mt-2">
                 <img src={location} className="mr-1.5"/>
-                <span className={`${styles.subheading5} text-[16px]`}>Online</span>
+                <span className={`${styles.subheading5} text-[16px]`}>{props.data.location}</span>
             </div>
         </div>
     )
