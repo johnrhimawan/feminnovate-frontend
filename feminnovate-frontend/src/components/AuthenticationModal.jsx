@@ -12,7 +12,7 @@ const onKeyDown = (event) => {
   if (event.keyCode === 13) event.preventDefault();
 };
 
-const CloseButton = ({ onClick }) => {
+export const CloseButton = ({ onClick }) => {
   return (
     <button className="w-3 sm:w-4 h-3 sm:h-4 m-auto -mr-1" onClick={onClick}>
       <img src={close} />
@@ -31,7 +31,7 @@ const LogoWithTagline = () => {
   );
 };
 
-const Input = ({ label, id, name, type, value, onChange }) => {
+export const Input = ({ label, id, name, type, value, onChange }) => {
   return (
     <div className="flex flex-col w-[100%] items-left mb-4">
       <label
