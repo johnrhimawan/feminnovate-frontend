@@ -2,9 +2,35 @@ import Navbar from "../components/Navbar";
 import WorkshopContainer from "../components/WorkshopContainer";
 import WorkshopSidebar from "../components/WorkshopSidebar";
 import styles from "../style";
+import { API_URL } from '../constants';
+import axios from "axios"
+import { useEffect, useState } from "react"
 
 const WorkshopListingPage = () => {
-    return (
+
+    const [workshops, setWorkshops] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const token = localStorage.getItem('token');
+
+    const fetchWorkshops = () => {
+        axios.get(`${API_URL}api/workshop/`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }).then(response => {
+            console.log(response.data)
+            setWorkshops(response.data)
+            setIsLoaded(true)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    useEffect(() => {
+        fetchWorkshops()
+    }, [])
+
+    if (isLoaded) return (
         <>
             <Navbar/>
             <div className="flex w-[100%] my-10 px-10 bg-white">
@@ -16,15 +42,9 @@ const WorkshopListingPage = () => {
                         Events / Workshops
                     </span>
                     <div className="grid lg:grid-cols-3 w-[100%] gap-5 mt-8 md:grid-cols-2 xs:grid-cols-1">
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
-                        <WorkshopContainer/>
+                        {workshops.map(workshop => (
+                            <WorkshopContainer data={workshop} key={workshop.id}/>
+                        ))}
                     </div>
                 </div>
             </div>
