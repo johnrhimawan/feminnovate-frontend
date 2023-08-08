@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LandingNavbar from "../components/LandingNavbar";
 import AuthenticationModal from "../components/AuthenticationModal";
 import background from "../assets/yellow-bg.png";
 import landingImage from "../assets/landing-img.png";
 import styles from "../style";
+import About from "../components/About";
+import Faq from "../components/Faq";
+import { useLocation } from "react-router-dom";
 
 const LandingPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
+
   const [openModal, setOpenModal] = useState(false);
   const [openSignUpModal, setOpenSignUpModal] = useState(false);
   const [openLogInModal, setOpenLogInModal] = useState(false);
@@ -38,7 +54,7 @@ const LandingPage = () => {
         <div className="flex flex-col h-[calc(100vh-110px)]">
           <div className="flex flex-row h-[70%] w-[100%] justify-center items-center">
             <img
-              className="scale-50 lg:scale-60 xl:scale-80"
+              className="xs:w-4/5 sm:scale-50 lg:scale-60 xl:scale-80"
               src={landingImage}
             />
           </div>
@@ -59,6 +75,8 @@ const LandingPage = () => {
             </button>
           </div>
         </div>
+        <About />
+        <Faq />
       </div>
       {openModal && (openSignUpModal || openLogInModal) && (
         <div className="flex fixed inset-0 h-full w-full justify-center items-center z-20">
