@@ -4,7 +4,7 @@ import { CSSTransition } from "react-transition-group"; // ES6
 const questions = [
     {
         Question: "What is Feminnovate?",
-        Answer: "Lorem Ipsum.",
+        Answer: "Feminnovate is a website that enables women to pursue or advance their careers in STEM by providing them a platform to look for job openings/events and obtain mentorship.",
     },
 ];
 
@@ -20,8 +20,11 @@ const Faq = () => {
 
     return (
         <div className="items-center w-full max-w-[1280px] mx-auto pb-20" id="faq">
-            <div className="font-extrabold text-[44px] pt-12 pb-12 text-center">
+            <div className="font-extrabold text-[44px] pt-12 pb-12 text-center hidden sm:block">
                 Frequently Asked Questions
+            </div>
+            <div className="font-extrabold text-[44px] pt-12 pb-12 text-center sm:hidden">
+                FAQ
             </div>
             <div className="w-4/5 mx-auto">
                 {questions.map((item, i) => (
@@ -44,8 +47,8 @@ const Faq = () => {
                             <div
                                 className={
                                     selected === i
-                                        ? "h-auto"
-                                        : "h-0 overflow-hidden"
+                                        ? "h-auto w-11/12"
+                                        : "h-0 overflow-hidden w-11/12"
                                 }
                             >
                                 {item.Answer}

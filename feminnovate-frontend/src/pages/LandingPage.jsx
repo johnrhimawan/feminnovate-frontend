@@ -54,7 +54,7 @@ const LandingPage = () => {
         <div className="flex flex-col h-[calc(100vh-110px)]">
           <div className="flex flex-row h-[70%] w-[100%] justify-center items-center">
             <img
-              className="scale-50 lg:scale-60 xl:scale-80"
+              className="xs:w-4/5 sm:scale-50 lg:scale-60 xl:scale-80"
               src={landingImage}
             />
           </div>
