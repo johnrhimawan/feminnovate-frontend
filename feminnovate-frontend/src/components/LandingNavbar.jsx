@@ -1,4 +1,5 @@
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 /**
  * Component for the navbar used for the landing page.
@@ -11,12 +12,12 @@ const LandingNavbar = () => {
             <div className="flex justify-between items-center py-8 px-20">
                 <img src={logo} />
                 <div className="flex flex-row gap-14 text-gray-500 font-semibold">
-                    <a href="#" className="transition-all hover:font-extrabold my-auto">
+                    <Link to="/#about" className="transitionall hover:font-extrabold my-auto">
                         About
-                    </a>
-                    <a href="#" className="transition-all hover:font-extrabold my-auto">
+                    </Link>
+                    <Link to="/#faq" className="transitionall hover:font-extrabold my-auto">
                         FAQ
-                    </a>
+                    </Link>
                 </div>
             </div>
         </nav>
