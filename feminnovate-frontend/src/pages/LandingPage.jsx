@@ -4,6 +4,7 @@ import AuthenticationModal from "../components/AuthenticationModal";
 import background from "../assets/yellow-bg.png";
 import landingImage from "../assets/landing-img.png";
 import styles from "../style";
+import Faq from "../components/Faq";
 
 const LandingPage = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -59,6 +60,7 @@ const LandingPage = () => {
             </button>
           </div>
         </div>
+        <Faq />
       </div>
       {openModal && (openSignUpModal || openLogInModal) && (
         <div className="flex fixed inset-0 h-full w-full justify-center items-center z-20">
