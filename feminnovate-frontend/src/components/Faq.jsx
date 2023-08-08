@@ -19,7 +19,7 @@ const Faq = () => {
     };
 
     return (
-        <div className="items-center w-full max-w-[1280px] mx-auto pb-20">
+        <div className="items-center w-full max-w-[1280px] mx-auto pb-20" id="faq">
             <div className="font-extrabold text-[44px] pt-12 pb-12 text-center">
                 Frequently Asked Questions
             </div>

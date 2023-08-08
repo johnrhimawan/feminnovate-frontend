@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import FeatureCards from "./FeatureCards"
+import FeatureCards from "./FeatureCards";
 
 const About = () => {
     return (
-        <div className="items-center w-full max-w-[1280px] mx-auto pb-20">
+        <div className="items-center w-full max-w-[1280px] mx-auto pb-20" id="about">
             <div className="font-extrabold text-[44px] pt-12 pb-12 text-center">
                 About Feminnovate
             </div>
@@ -13,16 +13,19 @@ const About = () => {
                     advance their careers in STEM by providing them a platform
                     to look for job openings/events and obtain mentorship.
                 </p>
-                <p>
-                    Feminnovate offers the following features
-                </p>
+                <p>Feminnovate offers the following features</p>
                 <FeatureCards />
                 <p>
-                    FemInnovate is submitted as part of TCS Sustainathon 2023.
+                    FemInnovate is submitted as part of{" "}
+                    <a
+                        href="https://www.sustainathon.tcsapps.com/events/ongoing/SG2023"
+                        target="_blank"
+                        className=" transition text-blue hover:font-semibold hover:underline"
+                    >
+                        TCS Sustainathon 2023.
+                    </a>
                 </p>
-                <p>
-                    View the full code here!
-                </p>
+                <p>View the full code here!</p>
             </div>
         </div>
     );
