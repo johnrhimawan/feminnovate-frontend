@@ -11,11 +11,12 @@ import { API_URL } from "../constants"
 import { useNavigate } from "react-router"
 import { useParams } from "react-router-dom"
 
-const WorkshopDetailsPage = (props) => {
+const WorkshopDetailsPage = () => {
 
-    const templateDesc = "Join our Basic Programming Workshop and dive into the exciting world of coding! This beginner-friendly workshop is designed for individuals with little to no prior programming experience. Discover the fundamentals of programming through hands-on exercises and interactive learning. Learn to think like a programmer, write your first lines of code, and gain the skills needed to start your coding journey. No programming knowledge required – just bring your enthusiasm and curiosity!"
     const [details, setDetails] = useState({});
     const [loaded, setLoaded] = useState(false);
+    const [isSaved, setIsSaved] = useState(false); 
+    
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -38,6 +39,22 @@ const WorkshopDetailsPage = (props) => {
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+
+    const addSaved = () => {
+        axios.post(`${API_URL}api/save/workshop/`, {
+            workshop_id: id,
+            save: !isSaved,
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }).then((res) => {
+            setIsSaved(!isSaved);
+        }).catch((err) => {
+            console.log(err);
+        });
     };
 
     useEffect(() => {
@@ -85,7 +102,7 @@ const WorkshopDetailsPage = (props) => {
                         <span className="mr-2">Register</span>
                         <img src={redirect}/>
                     </button>
-                    <button className="py-1 px-4 rounded-3xl border border-grey mr-2 hover:bg-opacity-25 hover:bg-black">Save</button>
+                    <button className="py-1 px-4 rounded-3xl border border-grey mr-2 hover:bg-opacity-25 hover:bg-black" onClick={addSaved}>{isSaved ? "Saved" : "Save"}</button>
                 </div>
 
                 <div className="mt-8">
