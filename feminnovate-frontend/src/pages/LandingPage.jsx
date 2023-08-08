@@ -4,6 +4,7 @@ import AuthenticationModal from "../components/AuthenticationModal";
 import background from "../assets/yellow-bg.png";
 import landingImage from "../assets/landing-img.png";
 import styles from "../style";
+import About from "../components/About";
 import Faq from "../components/Faq";
 
 const LandingPage = () => {
@@ -60,6 +61,7 @@ const LandingPage = () => {
             </button>
           </div>
         </div>
+        <About />
         <Faq />
       </div>
       {openModal && (openSignUpModal || openLogInModal) && (
