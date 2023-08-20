@@ -25,7 +25,7 @@ const Navbar = () => {
           >
             Events
           </a>
-          <a href="#" className="transition-all hover:font-extrabold my-auto">
+          <a href="/forum" className="transition-all hover:font-extrabold my-auto">
             Forum
           </a>
           <a href="/profile">
