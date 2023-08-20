@@ -12,6 +12,7 @@ import JobDetailsPage from "./pages/JobDetailsPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import WorkshopListingPage from "./pages/WorkshopListingPage.jsx";
 import WorkshopDetailsPage from "./pages/WorkshopDetailsPage.jsx";
+import ComingSoonPage from "./pages/ComingSoonPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -70,6 +71,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           element={
             <ProtectedRoute>
               <WorkshopDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/forum"
+          element={
+            <ProtectedRoute>
+              <ComingSoonPage />
             </ProtectedRoute>
           }
         />
