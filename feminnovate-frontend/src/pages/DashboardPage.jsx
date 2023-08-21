@@ -51,6 +51,8 @@ const DashboardPage = () => {
   const [upcomingWorkshops, setUpcomingWorkshops] = useState([]);
   const [companies, setCompanies] = useState([]);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const getUser = async () => {
     await axios
       .get(`${API_URL}api/user/${username}/`, { headers: headers })
@@ -61,6 +63,8 @@ const DashboardPage = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    setIsLoaded(true);
 
     await axios
       .get(`${API_URL}api/user/${username}/saved_jobs/`, { headers: headers })
@@ -86,11 +90,9 @@ const DashboardPage = () => {
       .get(`${API_URL}api/workshop/`, { headers: headers })
       .then((resp) => {
         setUpcomingWorkshops(
-          resp.data
-            .filter((x) => {
-              return moment().format("YYYY-MM-DD") <= x.start_time;
-            })
-            .map((x) => x.id)
+          resp.data.filter((x) => {
+            return moment().format("YYYY-MM-DD") <= x.start_time;
+          })
         );
       })
       .catch((error) => {
@@ -112,47 +114,50 @@ const DashboardPage = () => {
   }, [username]);
 
   return (
-    <>
-      <Navbar />
-      <div className="flex flex-col px-24 pb-12 gap-10">
-        <div className={`${styles.heading1} text-black`}>Hello, {name}!</div>
-        <div className={`${styles.subheading3} text-black/50 -my-8`}>
-          "Women have the power to revolutionize STEM fields and leave an
-          indelible mark on the world." - Margaret Hamilton
-        </div>
-        <div className={`${styles.subheading3} text-black/50 -mb-9`}>
-          Apply for your saved{" "}
-          <span className={`${styles.subheading4} text-black`}>jobs</span> and{" "}
-          <span className={`${styles.subheading4} text-black`}>workshops</span>{" "}
-          now!
-        </div>
-        <div></div>
-        <div className="flex flex-col overflow-hidden p-5 gap-5 bg-purple/25 justify-between rounded-xl">
-          <InnerCard
-            title="Saved jobs"
-            message="No jobs saved yet"
-            desc="Your saved jobs will appear here."
-            itemValue={savedJobs}
-            itemComponentName="JobContainer"
-          ></InnerCard>
-          <InnerCard
-            title="Saved workshops"
-            message="No workshops saved yet"
-            desc="Your saved workshops will appear here."
-            itemValue={savedWorkshops}
-            itemComponentName="WorkshopContainer"
-          ></InnerCard>
-        </div>
-        <div className="flex flex-row overflow-hidden p-5 gap-5 bg-yellow/25 justify-between rounded-xl">
-          <InnerCard
-            title="Upcoming workshops"
-            message="There are no upcoming workshops"
-            desc="Upcoming workshops will appear here."
-            itemValue={upcomingWorkshops}
-            itemComponentName="WorkshopContainer"
-          ></InnerCard>
-        </div>
-        {/* <div className="flex flex-row overflow-hidden p-5 gap-5 bg-blue/25 justify-between rounded-xl">
+    isLoaded && (
+      <>
+        <Navbar />
+        <div className="flex flex-col px-24 pb-12 gap-10">
+          <div className={`${styles.heading1} text-black`}>Hello, {name}!</div>
+          <div className={`${styles.subheading3} text-black/50 -my-8`}>
+            "Women have the power to revolutionize STEM fields and leave an
+            indelible mark on the world." - Margaret Hamilton
+          </div>
+          <div className={`${styles.subheading3} text-black/50 -mb-9`}>
+            Apply for your saved{" "}
+            <span className={`${styles.subheading4} text-black`}>jobs</span> and{" "}
+            <span className={`${styles.subheading4} text-black`}>
+              workshops
+            </span>{" "}
+            now!
+          </div>
+          <div></div>
+          <div className="flex flex-col overflow-hidden p-5 gap-5 bg-purple/25 justify-between rounded-xl">
+            <InnerCard
+              title="Saved jobs"
+              message="No jobs saved yet"
+              desc="Your saved jobs will appear here."
+              itemValue={savedJobs}
+              itemComponentName="JobContainer"
+            ></InnerCard>
+            <InnerCard
+              title="Saved workshops"
+              message="No workshops saved yet"
+              desc="Your saved workshops will appear here."
+              itemValue={savedWorkshops}
+              itemComponentName="WorkshopContainer"
+            ></InnerCard>
+          </div>
+          <div className="flex flex-row overflow-hidden p-5 gap-5 bg-yellow/25 justify-between rounded-xl">
+            <InnerCard
+              title="Upcoming workshops"
+              message="There are no upcoming workshops"
+              desc="Upcoming workshops will appear here."
+              itemValue={upcomingWorkshops}
+              itemComponentName="WorkshopContainer"
+            ></InnerCard>
+          </div>
+          {/* <div className="flex flex-row overflow-hidden p-5 gap-5 bg-blue/25 justify-between rounded-xl">
           <InnerCard
             title="Companies you might be interested in"
             message="No companies found"
@@ -161,8 +166,9 @@ const DashboardPage = () => {
             itemComponentName="InterestCard"
           ></InnerCard>
         </div> */}
-      </div>
-    </>
+        </div>
+      </>
+    )
   );
 };
 
