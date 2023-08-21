@@ -1,19 +1,19 @@
-import Navbar from '../components/Navbar';
-import styles from '../style';
-import back from '../assets/back.png';
-import calendar from '../assets/calendar.png';
-import location from '../assets/location-marker-2.png';
-import redirect from '../assets/redirect.png';
-import { useNavigate } from 'react-router';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL } from '../constants';
-import { useEffect, useState } from 'react';
-import { parseDate } from '../components/WorkshopContainer';
+import Navbar from "../components/Navbar";
+import styles from "../style";
+import back from "../assets/back.png";
+import calendar from "../assets/calendar.png";
+import location from "../assets/location-marker-2.png";
+import redirect from "../assets/redirect.png";
+import { useNavigate } from "react-router";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../constants";
+import { useEffect, useState } from "react";
+import { parseDate } from "../components/WorkshopContainer";
 
 const WorkshopDetailsPage = () => {
   const { id } = useParams();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [loaded, setLoaded] = useState(false);
   const [workshopDetails, setWorkshopDetails] = useState({});
   const [isSaved, setIsSaved] = useState(false);
@@ -21,7 +21,7 @@ const WorkshopDetailsPage = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/events');
+    navigate(-1);
   };
 
   const fetchWorkshopDetails = () => {
@@ -29,7 +29,7 @@ const WorkshopDetailsPage = () => {
       .get(`${API_URL}api/workshop/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'Application/JSON',
+          "Content-Type": "Application/JSON",
         },
       })
       .then((response) => {
@@ -42,11 +42,11 @@ const WorkshopDetailsPage = () => {
   };
 
   const fetchSaved = async () => {
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem("username");
     axios
       .get(`${API_URL}api/user/${username}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((res) => {
@@ -96,10 +96,12 @@ const WorkshopDetailsPage = () => {
         <div className="w-[100%] px-20 mt-2 mb-10">
           <div
             className="flex items-center mb-8 cursor-pointer"
-            onClick={goBack}>
+            onClick={goBack}
+          >
             <img src={back} className="w-4" />
             <p
-              className={`${styles.subheading4} text-black text-opacity-40 ml-2 hover:text-opacity-60`}>
+              className={`${styles.subheading4} text-black text-opacity-40 ml-2 hover:text-opacity-60`}
+            >
               Back
             </p>
           </div>
@@ -115,7 +117,8 @@ const WorkshopDetailsPage = () => {
               href={`${workshopDetails && workshopDetails.website}`}
               target="_blank"
               rel="noreferrer"
-              className={`${styles.subheading2} underline text-hyperlink`}>
+              className={`${styles.subheading2} underline text-hyperlink`}
+            >
               {workshopDetails && workshopDetails.organizer.name}
             </a>
             <p className={`${styles.heading2} text-black my-2`}>
@@ -151,25 +154,29 @@ const WorkshopDetailsPage = () => {
                 window.location.replace(
                   workshopDetails && workshopDetails.website
                 )
-              }>
+              }
+            >
               <span className="mr-2">Register</span>
               <img src={redirect} />
             </button>
             <button
               className="py-1 px-4 rounded-3xl border border-grey mr-2 hover:bg-opacity-25 hover:bg-black"
-              onClick={saveWorkshop}>
-              {isSaved ? 'Saved' : 'Save'}
+              onClick={saveWorkshop}
+            >
+              {isSaved ? "Saved" : "Save"}
             </button>
           </div>
 
           <div className="mt-8">
             <div
-              className={`w-[100%] bg-pink bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}>
+              className={`w-[100%] bg-pink bg-opacity-25 border border-grey rounded-2xl px-8 pt-6 pb-10`}
+            >
               <p className={`${styles.subheading2} text-black mb-2`}>
                 Description
               </p>
               <p
-                className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}>
+                className={`${styles.subheading7} leading-6 text-black text-justify whitespace-pre-wrap`}
+              >
                 {workshopDetails && workshopDetails.description}
               </p>
             </div>
